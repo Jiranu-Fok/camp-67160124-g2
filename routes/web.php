@@ -1,7 +1,5 @@
 <?php
-
 use Illuminate\Support\Facades\Route;
-
 Route::get('/', function () {
-    return view('html101');
-});
+     return view('html101');
+     });
