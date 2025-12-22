@@ -2,11 +2,11 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Workshop HTML</title>
-    <link rel="stylesheet" href="css/bootstrap.css" />
+    <title>Workshop HTML FORM</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
 
     <script>
-        function validateForm() {
+        function submitForm() {
 
             let fName   = document.getElementById("fName").value.trim();
             let lName   = document.getElementById("lName").value.trim();
@@ -15,22 +15,38 @@
             let gender  = document.getElementById("gender").value;
             let photo   = document.getElementById("photo").value;
             let address = document.getElementById("address").value.trim();
+            let color   = document.getElementById("color").value;
             let music   = document.getElementById("music").value;
             let agree   = document.getElementById("agree").checked;
 
             let result = document.getElementById("result");
 
-            if (fName === "" || lName === "" || birth === "" || age === "" ||
+            // ❌ Error
+            if (
+                fName === "" || lName === "" || birth === "" || age === "" ||
                 gender === "" || photo === "" || address === "" ||
-                music === "" || !agree) {
-
-                result.innerHTML = "❌ ไม่กรอกข้อมูล (Error)";
-                result.className = "alert alert-danger mt-4";
+                music === "" || !agree
+            ) {
+                result.innerHTML = `
+                    <div class="alert alert-danger mt-4">
+                        ❌ ไม่กรอกข้อมูล (Error)
+                    </div>
+                `;
                 return false;
             }
 
-            result.innerHTML = "✅ กรอกข้อมูลทั้งหมดครบ (Pass)";
-            result.className = "alert alert-success mt-4";
+            // ✅ Pass (แสดงผลลัพธ์หน้าใหม่)
+            document.getElementById("formSection").style.display = "none";
+            document.getElementById("resultSection").style.display = "block";
+
+            document.getElementById("rName").innerText = fName + " " + lName;
+            document.getElementById("rBirth").innerText = birth;
+            document.getElementById("rAge").innerText = age;
+            document.getElementById("rGender").innerText = gender;
+            document.getElementById("rAddress").innerText = address;
+            document.getElementById("rColor").innerText = color;
+            document.getElementById("rMusic").innerText = music;
+
             return false;
         }
     </script>
@@ -38,106 +54,60 @@
 
 <body>
 <div class="container pt-5">
+
+<!-- ================== FORM ================== -->
+<div id="formSection">
     <h1>Workshop #HTML – FORM</h1>
 
-    <form onsubmit="return validateForm();">
+    <form onsubmit="return submitForm();">
 
-        <div class="row mb-3">
-            <div class="col-4">ชื่อ</div>
-            <div class="col-6">
-                <input type="text" id="fName" class="form-control">
-            </div>
+        <input class="form-control mb-2" id="fName" placeholder="ชื่อ">
+        <input class="form-control mb-2" id="lName" placeholder="สกุล">
+        <input class="form-control mb-2" id="birth" placeholder="วัน/เดือน/ปีเกิด">
+        <input class="form-control mb-2" id="age" type="number" placeholder="อายุ">
+
+        <select class="form-select mb-2" id="gender">
+            <option value="">-- เลือกเพศ --</option>
+            <option>ชาย</option>
+            <option>หญิง</option>
+            <option>อื่น ๆ</option>
+        </select>
+
+        <input type="file" id="photo" class="form-control mb-2">
+        <textarea class="form-control mb-2" id="address" placeholder="ที่อยู่"></textarea>
+        <input type="color" id="color" class="form-control form-control-color mb-2">
+
+        <select class="form-select mb-2" id="music">
+            <option value="">-- แนวเพลงที่ชอบ --</option>
+            <option>Pop</option>
+            <option>Rock</option>
+            <option>Hip-Hop</option>
+            <option>EDM</option>
+        </select>
+
+        <div class="mb-3">
+            <input type="checkbox" id="agree"> ยินยอมตามเงื่อนไข
         </div>
 
-        <div class="row mb-3">
-            <div class="col-4">สกุล</div>
-            <div class="col-6">
-                <input type="text" id="lName" class="form-control">
-            </div>
-        </div>
-
-        <div class="row mb-3">
-            <div class="col-4">วัน/เดือน/ปีเกิด</div>
-            <div class="col-6">
-                <input type="text" id="birth" class="form-control" placeholder="dd/mm/yyyy">
-            </div>
-        </div>
-
-        <div class="row mb-3">
-            <div class="col-4">อายุ</div>
-            <div class="col-6">
-                <input type="number" id="age" class="form-control">
-            </div>
-        </div>
-
-        <div class="row mb-3">
-            <div class="col-4">เพศ</div>
-            <div class="col-6">
-                <select id="gender" class="form-select">
-                    <option value="">-- เลือกเพศ --</option>
-                    <option value="male">ชาย</option>
-                    <option value="female">หญิง</option>
-                    <option value="other">อื่น ๆ</option>
-                </select>
-            </div>
-        </div>
-
-        <div class="row mb-3">
-            <div class="col-4">รูป</div>
-            <div class="col-6">
-                <input type="file" id="photo" class="form-control">
-            </div>
-        </div>
-
-        <div class="row mb-3">
-            <div class="col-4">ที่อยู่</div>
-            <div class="col-6">
-                <textarea id="address" class="form-control"></textarea>
-            </div>
-        </div>
-
-        <div class="row mb-3">
-            <div class="col-4">สีที่ชอบ</div>
-            <div class="col-6">
-                <input type="color" id="color" class="form-control form-control-color">
-            </div>
-        </div>
-
-        <div class="row mb-3">
-            <div class="col-4">แนวเพลงที่ชอบ</div>
-            <div class="col-6">
-                <select id="music" class="form-select">
-                    <option value="">-- เลือกแนวเพลง --</option>
-                    <option>Pop</option>
-                    <option>Rock</option>
-                    <option>Hip-Hop</option>
-                    <option>EDM</option>
-                    <option>ลูกทุ่ง</option>
-                    <option>เพื่อชีวิต</option>
-                </select>
-            </div>
-        </div>
-
-        <div class="row mb-4">
-            <div class="col-4"></div>
-            <div class="col-6">
-                <input type="checkbox" id="agree">
-                <label for="agree">ยินยอมตามเงื่อนไขการสมัคร</label>
-            </div>
-        </div>
-
-        <div class="row mb-3">
-            <div class="col-4"></div>
-            <div class="col-6">
-                <button type="reset" class="btn btn-secondary">ล้างข้อมูล</button>
-                <button type="submit" class="btn btn-primary">บันทึก</button>
-            </div>
-        </div>
-
-        <!-- แสดงผล Error / Pass -->
+        <button type="submit" class="btn btn-primary">บันทึก</button>
         <div id="result"></div>
-
     </form>
+</div>
+
+<!-- ================== RESULT ================== -->
+<div id="resultSection" style="display:none;">
+    <h2>✅ กรอกข้อมูลทั้งหมดครบ (Pass)</h2>
+    <p><strong>ชื่อ-สกุล:</strong> <span id="rName"></span></p>
+    <p><strong>วันเกิด:</strong> <span id="rBirth"></span></p>
+    <p><strong>อายุ:</strong> <span id="rAge"></span></p>
+    <p><strong>เพศ:</strong> <span id="rGender"></span></p>
+    <p><strong>ที่อยู่:</strong> <span id="rAddress"></span></p>
+    <p><strong>สีที่ชอบ:</strong> <span id="rColor"></span></p>
+    <p><strong>แนวเพลงที่ชอบ:</strong> <span id="rMusic"></span></p>
+
+    <button class="btn btn-secondary" onclick="location.reload()">กลับหน้าฟอร์ม</button>
+</div>
+
 </div>
 </body>
 </html>
