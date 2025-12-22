@@ -4,10 +4,8 @@
     <meta charset="UTF-8">
     <title>Workshop HTML FORM</title>
     <link rel="stylesheet" href="css/bootstrap.css">
-
     <script>
         function submitForm() {
-
             let fName   = document.getElementById("fName").value.trim();
             let lName   = document.getElementById("lName").value.trim();
             let birth   = document.getElementById("birth").value.trim();
@@ -18,10 +16,7 @@
             let color   = document.getElementById("color").value;
             let music   = document.getElementById("music").value;
             let agree   = document.getElementById("agree").checked;
-
             let result = document.getElementById("result");
-
-            // ❌ Error
             if (
                 fName === "" || lName === "" || birth === "" || age === "" ||
                 gender === "" || photo === "" || address === "" ||
@@ -29,16 +24,13 @@
             ) {
                 result.innerHTML = `
                     <div class="alert alert-danger mt-4">
-                        ❌ ไม่กรอกข้อมูล (Error)
+                        ❌ ข้อมูลไม่ครบ (Error)
                     </div>
                 `;
                 return false;
             }
-
-            // ✅ Pass (แสดงผลลัพธ์หน้าใหม่)
             document.getElementById("formSection").style.display = "none";
             document.getElementById("resultSection").style.display = "block";
-
             document.getElementById("rName").innerText = fName + " " + lName;
             document.getElementById("rBirth").innerText = birth;
             document.getElementById("rAge").innerText = age;
@@ -46,16 +38,12 @@
             document.getElementById("rAddress").innerText = address;
             document.getElementById("rColor").innerText = color;
             document.getElementById("rMusic").innerText = music;
-
             return false;
         }
     </script>
 </head>
-
 <body>
 <div class="container pt-5">
-
-<!-- ================== FORM ================== -->
 <div id="formSection">
     <h1>Workshop #HTML – FORM</h1>
 
@@ -93,8 +81,6 @@
         <div id="result"></div>
     </form>
 </div>
-
-<!-- ================== RESULT ================== -->
 <div id="resultSection" style="display:none;">
     <h2>✅ กรอกข้อมูลทั้งหมดครบ (Pass)</h2>
     <p><strong>ชื่อ-สกุล:</strong> <span id="rName"></span></p>
