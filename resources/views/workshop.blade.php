@@ -17,31 +17,26 @@
 
         <form action="{{ url('/workshop') }}" method="POST" enctype="multipart/form-data">
             @csrf
-
             <div class="row g-3 align-items-center mb-2">
                 <div class="col-12 col-md-3 label-col"><label class="form-label mb-0">ชื่อ</label></div>
                 <div class="col-12 col-md-9"><input type="text" class="form-control" name="fName" required></div>
             </div>
-
             <div class="row g-3 align-items-center mb-2">
                 <div class="col-12 col-md-3 label-col"><label class="form-label mb-0">สกุล</label></div>
                 <div class="col-12 col-md-9"><input type="text" class="form-control" name="lName" required></div>
             </div>
-
             <div class="row g-3 align-items-center mb-2">
                 <div class="col-12 col-md-3 label-col"><label class="form-label mb-0">วัน/เดือน/ปีเกิด</label></div>
                 <div class="col-12 col-md-9">
                     <input type="text" class="form-control" name="birth" placeholder="วัน/เดือน/ปี (dd/mm/yyyy)" required>
                 </div>
             </div>
-
             <div class="row g-3 align-items-center mb-2">
                 <div class="col-12 col-md-3 label-col"><label class="form-label mb-0">อายุ</label></div>
                 <div class="col-12 col-md-9">
                     <input type="number" class="form-control" name="age" min="1" placeholder="กรอกอายุ" required>
                 </div>
             </div>
-
             <div class="row g-3 align-items-center mb-2">
                 <div class="col-12 col-md-3 label-col"><label class="form-label mb-0">เพศ</label></div>
                 <div class="col-12 col-md-9">
@@ -53,24 +48,20 @@
                     </select>
                 </div>
             </div>
-
             <div class="row g-3 align-items-center mb-2">
                 <div class="col-12 col-md-3 label-col"><label class="form-label mb-0">รูป</label></div>
                 <div class="col-12 col-md-9"><input type="file" class="form-control" name="photo" accept="image/*"></div>
             </div>
-
             <div class="row g-3 mb-2">
                 <div class="col-12 col-md-3 label-col"><label class="form-label mb-0">ที่อยู่</label></div>
                 <div class="col-12 col-md-9"><textarea class="form-control" name="address" rows="4" required></textarea></div>
             </div>
-
             <div class="row g-3 align-items-center mb-2">
                 <div class="col-12 col-md-3 label-col"><label class="form-label mb-0">สีที่ชอบ</label></div>
                 <div class="col-12 col-md-9">
                     <input type="color" class="form-control form-control-color" name="color" value="#000000">
                 </div>
             </div>
-
             <div class="row g-3 align-items-center mb-2">
                 <div class="col-12 col-md-3 label-col"><label class="form-label mb-0">แนวเพลงที่ชอบ</label></div>
                 <div class="col-12 col-md-9">
@@ -82,7 +73,6 @@
                     </select>
                 </div>
             </div>
-
             <div class="row g-3 align-items-center mb-3">
                 <div class="col-12 col-md-3 label-col"></div>
                 <div class="col-12 col-md-9">
@@ -92,7 +82,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="row g-3">
                 <div class="col-12 col-md-3 label-col"></div>
                 <div class="col-12 col-md-9">
@@ -101,7 +90,6 @@
                 </div>
             </div>
         </form>
-
     </div>
 </div>
 </body>
