@@ -4,6 +4,7 @@ use App\Models\Pokedex;
 use Illuminate\Http\Request;
 class PokedexController extends Controller
 {
+
     public function index()
     {
         $pokedexs = Pokedex::all();
@@ -15,45 +16,28 @@ class PokedexController extends Controller
     }
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'type' => 'required|string|max:255',
-            'species' => 'required|string|max:255',
-            'height' => 'required|integer',
-            'weight' => 'required|integer',
-            'hp' => 'required|numeric',
-            'attack' => 'required|numeric',
-            'defense' => 'required|numeric',
-            'image_url' => 'required|string|max:255',
-        ]);
-        Pokedex::create($validated);
-        return redirect('/pokedex')->with('success', 'เพิ่ม Pokémon สำเร็จ!');
+        Pokedex::create($request->all());
+        return redirect()->route('pokedexs.index');
     }
     public function edit($id)
     {
-        $pokemon = Pokedex::findOrFail($id);
-        return view('pokedex.form', compact('pokemon'));
+        $pokedex = Pokedex::findOrFail($id);
+        
+        // ใช้หน้า form.blade.php เหมือนเดิม แต่ส่งข้อมูลตัวที่จะแก้ไปด้วย
+        return view('pokedex.form', compact('pokedex'));
     }
     public function update(Request $request, $id)
     {
-        $pokemon = Pokedex::findOrFail($id);
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'type' => 'required|string|max:255',
-            'species' => 'required|string|max:255',
-            'height' => 'required|integer',
-            'weight' => 'required|integer',
-            'hp' => 'required|numeric',
-            'attack' => 'required|numeric',
-            'defense' => 'required|numeric',
-            'image_url' => 'required|string|max:255',
-        ]);
-        $pokemon->update($validated);
-        return redirect('/pokedex')->with('success', 'แก้ไข Pokémon สำเร็จ!');
+        $pokedex = Pokedex::findOrFail($id);
+        $pokedex->update($request->all());
+
+        return redirect()->route('pokedexs.index');
     }
     public function destroy($id)
     {
-        Pokedex::destroy($id);
-        return redirect('/pokedex')->with('success', 'ลบ Pokémon สำเร็จ!');
+        $pokedex = Pokedex::findOrFail($id);
+        $pokedex->delete();
+
+        return redirect()->route('pokedexs.index');
     }
 }

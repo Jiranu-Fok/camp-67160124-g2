@@ -1,39 +1,54 @@
 <!DOCTYPE html>
-<html>
+<html lang="th">
 <head>
+    <meta charset="UTF-8">
     <title>Pokedex List</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
 </head>
-<body class="p-4">
+<body>
+    <div class="container py-5">
+        <h1>Pokedex List</h1>
+        <div class="mb-3">
+            <a href="{{ route('pokedexs.create') }}" class="btn btn-primary">+ เพิ่ม Pokemon ใหม่</a>
+        </div>
 
-    <a href="{{ url('/pokedex/create') }}" class="btn btn-success mb-3">Add Pokemon</a>
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Type</th>
-                <th>HP</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-        @foreach($pokedexs as $p)
-            <tr>
-                <td>{{ $p->name }}</td>
-                <td>{{ $p->type }}</td>
-                <td>{{ $p->hp }}</td>
-                <td>
-                    <a href="{{ url('/pokedex/'.$p->id.'/edit') }}" class="btn btn-primary btn-sm">Edit</a>
-                    <form action="{{ url('/pokedex/'.$p->id) }}" method="POST" style="display:inline;">
-                        @csrf
-                        @method('DELETE')
-                        <button class="btn btn-danger btn-sm" type="submit">Delete</button>
-                    </form>
-                </td>
-            </tr>
-        @endforeach
-        </tbody>
-    </table>
+        <table class="table table-bordered table-striped">
+            <thead class="table-dark">
+                <tr>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>HP</th>
+                    <th>ATK</th>
+                    <th>DEF</th>
+                    <th>จัดการ</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($pokedexs as $poke)
+                <tr>
+                    <td>
+                        @if($poke->image_url)
+                            <img src="{{ $poke->image_url }}" style="height: 30px; margin-right: 5px;">
+                        @endif
+                        {{ $poke->name }}
+                    </td>
+                    <td><span class="badge bg-info text-dark">{{ $poke->type }}</span></td>
+                    <td>{{ $poke->hp }}</td>
+                    <td>{{ $poke->attack }}</td>
+                    <td>{{ $poke->defense }}</td>
+                    <td>
+                        <a href="{{ route('pokedexs.edit', $poke->id) }}" class="btn btn-warning btn-sm">Edit</a>
 
+                        <form action="{{ route('pokedexs.destroy', $poke->id) }}" method="POST" class="d-inline" onsubmit="return confirm('ยืนยันการลบ?');">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>
